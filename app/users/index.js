@@ -7,10 +7,10 @@ router.use((req,res,next) => {
   next()
 })
 
-router.get('/', controller.getAll);
-router.get('/:user_id', controller.get)
-router.put('/', controller.update)
+// router.get('/', controller.getAll);
+// router.get('/:user_id', controller.get)
+// router.put('/', controller.update)
 router.post('/', controller.create);
-router.delete('/:user_id', controller.delete)
+// router.delete('/:user_id', controller.delete)
 
 module.exports = router;

@@ -11,7 +11,7 @@ var locations = require('./app/locations/index')
 var port = process.env.PORT || 3000;
 var router = express.Router();
 
-mongoose.connect('mongodb://localhost/jsonAPI');
+mongoose.connect('mongodb://localhost/geoPhoto');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json())

@@ -7,13 +7,13 @@ controller.create = [
   function(req, res, next) {
     var user = new User()
 
-    user.twitter_id = req.body.twitter_id;
     user.name = req.body.name
-    user.age = req.body.age
+    user.email = req.body.email
+    user.password = req.body.password
 
-    user.save(function(err) {
+    user.save(function(err, data) {
       if (err) res.send(err)
-      res.json({message: 'Succeed'})
+      res.json({user_id: data._id})
     })
   }
 ]
@@ -41,9 +41,8 @@ controller.update = [
     User.findById(req.params.user_id, (err, user) => {
       if (err) res.send(err)
 
-      user.twitter_id = req.body.twitter_id
       user.name = req.body.name
-      user.age = req.body.age
+      user.email = req.body.email
 
       user.save((err) => {
         if (err) res.send(err)

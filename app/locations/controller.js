@@ -3,25 +3,21 @@ var Location = mongoose.model('Location')
 var fs = require('fs')
 var path = require('path')
 var NodeGeocoder = require('node-geocoder')
-
 var multer = require('multer')
 var upload = multer({dest: 'uploads/'})
-
 var geoCoderOptions = {
   provier:'openstreetmap'
 }
 var geocoder = NodeGeocoder(geoCoderOptions)
-
 var controller = {}
 
-controller.getAll = [
+controller.get = [
   function(req,res,next) {
-    Location.find(function(err, locations){
+    var userId = req.param('user_id')
+    Location.find({'user_id': userId}).
+    exec(function(err, locations){
       if(err) res.send(err)
-      // res.json(locations)
-      for (location of locations) {
-
-      }
+      res.json(locations)
     })
   }
 ]
@@ -35,6 +31,7 @@ controller.create = [upload.single('image'), function(req, res) {
     if (err) res.send(err)
 
     var location = new Location()
+    location.user_id = req.body.user_id
     location.latitude = req.body.latitude
     location.longitude = req.body.longitude
     location.imageUrl = req.file.path

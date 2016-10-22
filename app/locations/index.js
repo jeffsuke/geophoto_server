@@ -7,7 +7,7 @@ router.use((req, res, next) => {
   next()
 })
 
-router.get('/', controller.getAll)
+router.get('/:user_id', controller.get)
 router.post('/', controller.create)
 
 module.exports = router;
